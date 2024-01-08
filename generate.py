@@ -21,9 +21,9 @@ trade_schema = pa.schema([
     pa.field('size', pa.int64())])
 
 today=date.today()
-trade = ds.dataset("quack-api/"+str(today)+"/trade.csv", format = "csv", schema=trade_schema)
-quote = ds.dataset("quack-api/"+str(today)+"/quote.csv", format = "csv", schema=quote_schema)
+trade = ds.dataset("quack-api/trade.csv", format = "csv", schema=trade_schema)
+quote = ds.dataset("quack-api/quote.csv", format = "csv", schema=quote_schema)
 
-ds.write_dataset(trade, "quack-api/arrowdb/trade/"+str(today), format="arrow", schema=trade_schema)
-ds.write_dataset(quote, "quack-api/arrowdb/quote/"+str(today), format="arrow", schema=quote_schema)
+ds.write_dataset(trade, "quack-api/arrowdb/", format="arrow", schema=trade_schema)
+ds.write_dataset(quote, "quack-api/arrowdb/", format="arrow", schema=quote_schema)
 
