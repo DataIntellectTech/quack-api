@@ -2,15 +2,16 @@ import duckdb
 from fastapi import FastAPI, Query
 import pyarrow as pa
 import pyarrow.dataset as ds
+import os
 from pyarrow import csv
 from fastapi.responses import PlainTextResponse
 from tabulate import tabulate
 from typing import List, Annotated
 
-part=ds.partitioning(pa.schema([("date", pa.date64())]))
+home=os.environ['HOME']
 
-trade = ds.dataset("quack-api/arrowdb/trade", format = "arrow", partitioning=part)
-quote = ds.dataset("quack-api/arrowdb/quote", format = "arrow", partitioning=part) 
+trade = ds.dataset(home+"/quack-api/arrowdb/trade", format = "arrow")
+quote = ds.dataset(home+"/quack-api/arrowdb/quote", format = "arrow") 
 
 
 app = FastAPI()

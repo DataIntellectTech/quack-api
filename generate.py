@@ -1,9 +1,11 @@
 import pyarrow as pa
 import pyarrow.dataset as ds
 import duckdb
+import os
 from pyarrow import csv
 from datetime import date
 
+home=os.environ['HOME']
 quote_schema = pa.schema([
     pa.field('time', pa.timestamp('ns')),
     pa.field('src', pa.string()),
@@ -21,9 +23,9 @@ trade_schema = pa.schema([
     pa.field('size', pa.int64())])
 
 today=date.today()
-trade = ds.dataset("quack-api/trade.csv", format = "csv", schema=trade_schema)
-quote = ds.dataset("quack-api/quote.csv", format = "csv", schema=quote_schema)
+trade = ds.dataset(home+"/quack-api/trade.csv", format = "csv", schema=trade_schema)
+quote = ds.dataset(home+"/quack-api/quote.csv", format = "csv", schema=quote_schema)
 
-ds.write_dataset(trade, "quack-api/arrowdb/", format="arrow", schema=trade_schema)
-ds.write_dataset(quote, "quack-api/arrowdb/", format="arrow", schema=quote_schema)
+ds.write_dataset(trade, home+"/quack-api/arrowdb/trade", format="arrow", schema=trade_schema)
+ds.write_dataset(quote, home+"/quack-api/arrowdb/quote", format="arrow", schema=quote_schema)
 
