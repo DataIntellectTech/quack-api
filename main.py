@@ -32,7 +32,7 @@ def parameterisedquery(body: str,table: str, symbol: Annotated[str | None, Query
     conditions = []
 
     if symbol is not None:
-        conditions.append("sym in " + "("+symbol+")")
+        conditions.append("sym in " + symbol)
 
     if date is not None:
         conditions.append("date in " + date)
