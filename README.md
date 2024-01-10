@@ -22,6 +22,8 @@ To make use of QuackAPI, the following need installed in your virtual python env
 ```python
 pip install fastapi
 pip install uvicorn
+pip install typing
+pip install tabulate
 ```
 Once you have intalled the above, and have main.py defined then run the following line within your virtual environment:
 ```python
@@ -32,7 +34,7 @@ You can specify the host by -- host and the IP address, and the port will be ass
 ## Usage ##
 Provided within this repository is fake csv data that can be used. Within the generate.py script point to that data and then make an Apache Arrow file from it. However, if you want to extend this, and automate it, a suggestion would be to use crontab, and set up the crontab to at some point (probably end of day) run the generate.py script on your data to save down that day's data in Apache Arrow format. Anything that provides functionality to run scripts or carry out functions daily can be used, crontab was what we had available. 
 
-This is the first query in use, enter a simple query into the description, and it'll be return to the console below, as the image shows:
+This is the first query in use, enter a simple query into the description, and it'll be returned to the console below, as the image shows:
 
 ![image](https://github.com/DataIntellectTech/quack-api/assets/131150806/66f0e63a-5a4d-4a78-8228-6d177f366081)
 
