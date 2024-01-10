@@ -2,7 +2,7 @@ import pyarrow as pa
 import pyarrow.dataset as ds
 import duckdb
 import os
-from pyarrow import csv
+
 
 home=os.environ['HOME'] #setting environment variable
 
