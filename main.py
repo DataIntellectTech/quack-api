@@ -8,8 +8,10 @@ from typing import Annotated
 
 home=os.environ['HOME']                                                                         # setting environment variable
 
-trade = ds.dataset(home+"/quack-api/arrowdb/trade", format = "arrow")                           # assigning trade to the arrow trade dataset 
-quote = ds.dataset(home+"/quack-api/arrowdb/quote", format = "arrow")                           # assigning trade to the arrow quote dataset
+part = ds.partitioning(pa.schema([("date", pa.date64())]))                                      # defining the partition schema to partition on date
+
+trade = ds.dataset(home+"/quack-api/arrowdb/trade", format = "arrow", partitioning=part)        # assigning trade to the arrow trade dataset 
+quote = ds.dataset(home+"/quack-api/arrowdb/quote", format = "arrow", partitioning=part)        # assigning trade to the arrow quote dataset
 
 
 app = FastAPI()                                                                                 # 
