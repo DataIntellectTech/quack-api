@@ -6,7 +6,7 @@ import sys
 
 home=os.environ['HOME'] #setting environment variable
 
-quote_schema = pa.schema([                       # defining schema for quote dataset
+quote_schema = pa.schema([                       # defining schema for quote dataset, this should include all the columns from the csv that you are generating from
     pa.field('time', pa.timestamp('ns')),        # assigning time column timestamp type
     pa.field('src', pa.string()),                # assigning src column string type
     pa.field('sym', pa.string()),                # assigning sym column string type
@@ -20,10 +20,12 @@ trade_schema = pa.schema([                       # defining schema for trade dat
     pa.field('time', pa.timestamp('ns')),        # assigning time column timestamp type 
     pa.field('src', pa.string()),                # assigning src column string type
     pa.field('price', pa.float64()),             # assigning price column float type
-    pa.field('size', pa.int64())])               # assigning size column int typoe
+    pa.field('size', pa.int64())])               # assigning size column int type
 
-trade = ds.dataset(home+"/quack-api/"+str(sys.argv[1])+"/trade.csv", format = "csv", schema=trade_schema) #assigning trade to the arrow dataset generated from the trade csv
-quote = ds.dataset(home+"/quack-api/"+str(sys.argv[1])+"/quote.csv", format = "csv", schema=quote_schema) #assigning quote to the arrow dataset generated from the quote csv
+#If using other data that isn't trade or quote data, the schema will look different, and should include the column of that data, with their desired types
+
+trade = ds.dataset(home+"/quack-api/"+str(sys.argv[1])+"/trade.csv", format = "csv", schema=trade_schema) #assigning trade to the arrow dataset generated from the trade csv, using the trade schema assigned above
+quote = ds.dataset(home+"/quack-api/"+str(sys.argv[1])+"/quote.csv", format = "csv", schema=quote_schema) #assigning quote to the arrow dataset generated from the quote csv, using the quote schema assigned above
 
 ds.write_dataset(trade, home+"/quack-api/arrowdb/trade/"+str(sys.argv[1]), format="arrow", schema=trade_schema) # writing the trade dataset to disk, saving it in quack-api/arrowdb/2020-01-02/trade/ directory 
 ds.write_dataset(quote, home+"/quack-api/arrowdb/quote/"+str(sys.argv[1]), format="arrow", schema=quote_schema) # writing the quote dataset to disk, saving it in quack-api/arrowdb/2020-01-02/quote/ directory 
