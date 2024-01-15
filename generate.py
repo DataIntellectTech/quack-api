@@ -2,7 +2,7 @@ import pyarrow as pa
 import pyarrow.dataset as ds
 import duckdb
 import os
-
+import sys
 
 home=os.environ['HOME'] #setting environment variable
 
@@ -22,9 +22,9 @@ trade_schema = pa.schema([                       # defining schema for trade dat
     pa.field('price', pa.float64()),             # assigning price column float type
     pa.field('size', pa.int64())])               # assigning size column int typoe
 
-trade = ds.dataset(home+"/quack-api/2020-01-02/trade.csv", format = "csv", schema=trade_schema) #assigning trade to the arrow dataset generated from the trade csv
-quote = ds.dataset(home+"/quack-api/2020-01-02/quote.csv", format = "csv", schema=quote_schema) #assigning quote to the arrow dataset generated from the quote csv
+trade = ds.dataset(home+"/quack-api/"+str(sys.argv[1])+"/trade.csv", format = "csv", schema=trade_schema) #assigning trade to the arrow dataset generated from the trade csv
+quote = ds.dataset(home+"/quack-api/"+str(sys.argv[1])+"/quote.csv", format = "csv", schema=quote_schema) #assigning quote to the arrow dataset generated from the quote csv
 
-ds.write_dataset(trade, home+"/quack-api/arrowdb/trade/2020-01-02", format="arrow", schema=trade_schema) # writing the trade dataset to disk, saving it in quack-api/arrowdb/2020-01-02/trade/ directory 
-ds.write_dataset(quote, home+"/quack-api/arrowdb/quote/2020-01-02", format="arrow", schema=quote_schema) # writing the quote dataset to disk, saving it in quack-api/arrowdb/2020-01-02/quote/ directory 
+ds.write_dataset(trade, home+"/quack-api/arrowdb/trade/"+str(sys.argv[1]), format="arrow", schema=trade_schema) # writing the trade dataset to disk, saving it in quack-api/arrowdb/2020-01-02/trade/ directory 
+ds.write_dataset(quote, home+"/quack-api/arrowdb/quote/"+str(sys.argv[1]), format="arrow", schema=quote_schema) # writing the quote dataset to disk, saving it in quack-api/arrowdb/2020-01-02/quote/ directory 
 
