@@ -9,6 +9,7 @@ A simple DuckDB and FastAPI app
 
 ## Introduction ##
 The first thing you are probably asking is what is QuackAPI? It is a simple application you can use to take any set of Arrow or Parquet files (we're expecting trade and quote finance files) and will provide a simple yet fast database for them, that can be queried from within the browser. In order to achieve this we make use of two softwares, DuckDB and FastAPI.  
+
 DuckDB is a database management system that is completely embedded within the host process, effectively separating the data from the database. This means that you can use it to query data that is stored within various data formats. DuckDB has a Python API, therefore it can be embedded within a Python process.
 
 FastAPI is a web framework for building APIs with Python. With it, you can create APIs that receive HTTP requests for functions and carry them out.
