@@ -34,7 +34,7 @@ uvicorn --reload main:app
 You can specify the host by -- host and the IP address, and the port will be assigned at 8000, if you want to change this add --port and insert chosen port number. The --reload flag allows the system to track any changes to the main.py script while it is running. The FastAPI website has an entire tutorial on how to get the API running, and how to develop it, https://fastapi.tiangolo.com/tutorial/.
 
 ## Usage ##
-Provided within this repository is fake CSV data that can be used. Within the generate.py script point to that data and then make an Apache Arrow file. The easiest way to make use of the generate.py file is within the Python virtual environment run the command
+Provided within this repository is fake CSV data that can be used. To make use of the generate.py file run the following command within a Python virtual environement:
 ```python
 python generate.py date
 ```
