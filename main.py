@@ -1,5 +1,6 @@
 import duckdb
 from fastapi import FastAPI, Query
+import pyarrow as pa
 import pyarrow.dataset as ds
 import os
 from fastapi.responses import PlainTextResponse
