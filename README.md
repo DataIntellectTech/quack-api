@@ -7,6 +7,8 @@ A simple DuckDB and FastAPI app
 
 [Usage](#usage)
 
+[Generate.py](#Generate.py)
+
 ## Introduction ##
 The first thing you are probably asking is what is QuackAPI? It is a simple application you can use to take any set of Arrow or Parquet files (we're expecting these to be trade and quote finance files) and will provide a simple yet fast database for them, that can be queried from within the browser (note you can indirectly use CSVs but more on that later). In order to achieve this we make use of two softwares, DuckDB and FastAPI these provide a lot out of the box and so we are able to keep this repo fairly concise.  
 
