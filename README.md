@@ -51,10 +51,10 @@ which translates to "SELECT AVG(price) FROM trade WHERE sym in ('AAPL','GOOG')"
 ## Generate ##
 To make use of data in CSVs the generate.py file can be used to convert it to Arrow datasets run the following command within a Python virtual environement:
 ```python
-python generate.py csv_path arrow_path
+python generate.py --date yyyy/mm/dd
 ```
 where 
-The date after generate.py allows you to specify what CSV you want to be generated into an arrow file, and is necessary for the script to run. A date is required due to the structure of the direcotry containing the trade and quote CSVs.
+The date after generate.py allows you to specify what CSV you want to be generated into an arrow file, and is necessary for the script to run. A date is required due to the structure of the direcotry containing the trade and quote CSVs.  
 
 However, if you want to extend this, and automate it, a suggestion would be to use crontab, and set up the crontab to at some time daily (probably end of day) to run the generate.py script on your data to save down that day's data in Apache Arrow format. Anything that provides functionality to run scripts or carry out functions daily can be used, crontab was simply what we had available. 
 
