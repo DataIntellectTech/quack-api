@@ -7,8 +7,10 @@ A simple DuckDB and FastAPI app
 
 [Usage](#usage)
 
+[Generate](#generate)
+
 ## Introduction ##
-The first thing you are probably asking is what is QuackAPI? It is a simple application you can use to take any set of Arrow or Parquet files (we're expecting trade and quote finance files) and will provide a simple yet fast database for them, that can be queried from within the browser. In order to achieve this we make use of two softwares, DuckDB and FastAPI.  
+The first thing you are probably asking is what is QuackAPI? It is a simple application you can use to take any set of Arrow or Parquet files (we're expecting these to be trade and quote finance files) and will provide a simple yet fast database for them, that can be queried from within the browser (note you can indirectly use CSVs but more on that later). In order to achieve this we make use of two softwares, DuckDB and FastAPI these provide a lot out of the box and so we are able to keep this repo fairly concise.  
 
 DuckDB is a database management system that is completely embedded within the host process, effectively separating the data from the database. This means that you can use it to query data that is stored within various data formats. DuckDB has a Python API, therefore it can be embedded within a Python process.
 
@@ -27,20 +29,15 @@ pip install uvicorn
 pip install typing
 pip install tabulate
 ```
+
+## Usage ##
 Once you have installed the above, and have main.py defined then run the following line within your virtual environment:
 ```python
 uvicorn --reload main:app
 ```
-You can specify the host by -- host and the IP address, and the port will be assigned at 8000, if you want to change this add --port and insert chosen port number. The --reload flag allows the system to track any changes to the main.py script while it is running. The FastAPI website has an entire tutorial on how to get the API running, and how to develop it, https://fastapi.tiangolo.com/tutorial/.
+You can specify the host by '--host IP address', and the port will be assigned at 8000, if you want to change this add '--port xxxx' . The --reload flag allows the system to track any changes to the main.py script while it is running. The FastAPI website has an entire tutorial on how to get the API running, and how to develop it, https://fastapi.tiangolo.com/tutorial/.
 
-## Usage ##
-Provided within this repository is fake CSV data that can be used. To make use of the generate.py file run the following command within a Python virtual environement:
-```python
-python generate.py date
-```
-The date after generate.py allows you to specify what CSV you want to be generated into an arrow file, and is necessary for the script to run. A date is required due to the structure of the direcotry containing the trade and quote CSVs.
-
-However, if you want to extend this, and automate it, a suggestion would be to use crontab, and set up the crontab to at some time daily (probably end of day) to run the generate.py script on your data to save down that day's data in Apache Arrow format. Anything that provides functionality to run scripts or carry out functions daily can be used, crontab was simply what we had available. 
+To access our fucntions within the browser add /docs to the end of the link that appears. It should look something like: http://127.0.0.1:8000/docs.
 
 This is the first query in use, enter a simple query into the description, and it'll be returned to the console below, as the image shows:
 
@@ -50,6 +47,18 @@ The second query looks as follows:
 ![image](https://github.com/DataIntellectTech/quack-api/assets/131150806/cd006a7d-b7ce-48f1-a510-8a36cbfd6ec8)
 
 which translates to "SELECT AVG(price) FROM trade WHERE sym in ('AAPL','GOOG')"
+
+## Generate ##
+To make use of data in CSVs the generate.py file can be used to convert it to Arrow datasets run the following command within a Python virtual environement:
+```python
+python generate.py csv_path arrow_path
+```
+where 
+The date after generate.py allows you to specify what CSV you want to be generated into an arrow file, and is necessary for the script to run. A date is required due to the structure of the direcotry containing the trade and quote CSVs.
+
+However, if you want to extend this, and automate it, a suggestion would be to use crontab, and set up the crontab to at some time daily (probably end of day) to run the generate.py script on your data to save down that day's data in Apache Arrow format. Anything that provides functionality to run scripts or carry out functions daily can be used, crontab was simply what we had available. 
+
+
 
 
 
